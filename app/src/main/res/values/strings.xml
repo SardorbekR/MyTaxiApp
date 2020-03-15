@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">MyTaxiApp</string>
+    <string name="appBar_Title">Trip History</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_permissions">Permissions</string>
+    <string name="call_button">Call Button</string>
+    <string name="tariffTextView">Tariff</string>
+    <string name="payment_type_textView">Payment Type</string>
+    <string name="comfort_textView">Comfort</string>
+    <string name="cash_textView">Cash</string>
+    <string name="dateTextView">18:25, Today</string>
+    <string name="distance_textView">Distance</string>
+    <string name="trip_time_textView">Trip Time</string>
+    <string name="duration_textView">00:35</string>
+    <string name="distance__textView">18,4km</string>
+    <string name="fee_textView">7,000</string>
+    <string name="fare_textView">15,600</string>
+    <string name="watingFee__textView">1,850</string>
+    <string name="base_fare_textView">Base Fare</string>
+    <string name="ride_fee_textView">Ride fee</string>
+    <string name="waiting_fee_textView">Waiting Fee</string>
+    <string name="rating_textView">Rating:</string>
+    <string name="star">star</string>
+    <string name="driver_avatar">Driver Avatar</string>
+    <string name="driverName_textView">Temur</string>
+    <string name="ratingNum_textView">4.9</string>
+    <string name="trips_textView">Trips:</string>
+    <string name="tripsN_textView">2189</string>
+    <string name="white_cobalt_textView">White Cobalt</string>
+    <string name="licensePlate">01 | A 717 CB</string>
+    <string name="sampleAddress1">Sagbon 156 a block, Olmazor district</string>
+    <string name="sampleAddress2">Amir Temur Avenue 2a block 23 A</string>
+    <string name="timeToday_textView">18:25, Today</string>
+    <string name="date_textView">11.05.2018</string>
+    <string name="time_textView">12:55</string>
+    <string name="price_textView">18,200sum</string>
+</resources>
