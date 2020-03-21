@@ -1,8 +1,15 @@
 package r.sardorbek.mytaxiapp
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,10 +21,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.maps.DirectionsApi
+import com.google.maps.DirectionsApiRequest
+import com.google.maps.GeoApiContext
+import com.google.maps.model.*
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.bottom_sheet_trip_details.*
+
 
 class MapsActivity : FragmentActivity(), OnMapReadyCallback {
     private var locationPermissionGranted = false
@@ -37,6 +50,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
         mapFragment!!.getMapAsync(this)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         /*
          *   Here I defined marker properties such as position, icon and made it draggable.
@@ -50,6 +64,69 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
 
         if (locationPermissionGranted) {
             googleMap.isMyLocationEnabled = true
+            val locationManager: LocationManager = baseContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val providers = locationManager.getProviders(true)
+
+            var location: Location? = null
+            for (i in providers.indices) {
+                location = locationManager.getLastKnownLocation(providers[i])
+                if (location != null) break
+            }
+            if (location != null) {
+                //The code inside of this if condition draws the path between two points
+                val path: MutableList<LatLng> = ArrayList()
+
+                val context: GeoApiContext = GeoApiContext.Builder().apiKey("AIzaSyB7ZiJe5WB7XEP0HPjet_w_F2wZqVm37L8").build()
+                val req: DirectionsApiRequest = DirectionsApi.getDirections(context, "${location.latitude
+                },${location.longitude}", "41.33861,69.3342")
+                try {
+                    val res: DirectionsResult = req.await()
+
+                    if (res.routes != null && res.routes.isNotEmpty()) {
+                        val route: DirectionsRoute = res.routes[0]
+                        if (route.legs != null) {
+                            for (i in route.legs.indices) {
+                                val leg: DirectionsLeg = route.legs[i]
+                                if (leg.steps != null) {
+                                    for (j in leg.steps.indices) {
+                                        val step: DirectionsStep = leg.steps[j]
+                                        if (step.steps != null && step.steps.isNotEmpty()) {
+                                            for (k in step.steps.indices) {
+                                                val step1: DirectionsStep = step.steps[k]
+                                                val points1: EncodedPolyline = step1.polyline
+                                                if (points1 != null) {
+                                                    //Decode polyline and add points to list of route coordinates
+                                                    val coords1: MutableList<com.google.maps.model.LatLng>? = points1.decodePath()
+                                                    for (coord1 in coords1!!) {
+                                                        path.add(LatLng(coord1.lat, coord1.lng))
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            val points: EncodedPolyline = step.polyline
+                                            //Decode polyline and add points to list of route coordinates
+                                            val coords: MutableList<com.google.maps.model.LatLng>? = points.decodePath()
+                                            for (coord in coords!!) {
+                                                path.add(LatLng(coord.lat, coord.lng))
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (ex: Exception) {
+                    Log.e("TAG", ex.localizedMessage)
+                }
+
+                //Draw the polyline
+                if (path.size > 0) {
+                    val opts = PolylineOptions().addAll(path).color(Color.BLUE).width(5f)
+                    googleMap.addPolyline(opts)
+                }
+
+
+            }
         }
     }
 
@@ -112,5 +189,11 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
     companion object {
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2
     }
+
+    fun call(view: View) {
+        intent = Intent(Intent.ACTION_DIAL)
+        startActivity(intent);
+    }
+
 
 }

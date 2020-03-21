@@ -6,8 +6,10 @@ import android.content.Intent
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.view.MenuItem
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import r.sardorbek.mytaxiapp.adapter.TripAdapter
 import java.util.*
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setTitle(R.string.appBar_Title) //AppBar title set to "Trip history"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         tripHistory = ArrayList<Data>()
 
         //Setting some random data for listView
@@ -35,16 +38,16 @@ class MainActivity : AppCompatActivity() {
 
     //Sample data of addresses and prices for List View
     private fun sampleData() {
-        tripHistory!!.add(Data("Sagbon 156 a block, Olmazor district", "Amir Temur Avenue 2a block 23 A", "38.500sum"))
-        tripHistory!!.add(Data("Istiqbol 20 h, Mirabad dis.", "Sharaf Rashidov, prospect", "14.200sum"))
-        tripHistory!!.add(Data("Muqimi 2a h, Chilanzar dis.", "Qumbuloq 13 h, Uchtepa dis.", "9.500sum"))
-        tripHistory!!.add(Data("Shodlik 60 h, Uchtepa dis.", "Amir Temur Avenue 2a block 23 A", "12.500sum"))
-        tripHistory!!.add(Data("Sharaf Raswhidov, prospect", "Muqimi 2a h, Chilanzar dis.", "29.00sum"))
-        tripHistory!!.add(Data("Sagbon 156 a block, Olmazor district", "Amir Temur Avenue 2a block 23 A", "38.500sum"))
-        tripHistory!!.add(Data("Istiqbol 20 h, Mirabad dis.", "Sharaf Rashidov, prospect", "14.200sum"))
-        tripHistory!!.add(Data("Muqimi 2a h, Chilanzar dis.", "Qumbuloq 13 h, Uchtepa dis.", "9.500sum"))
-        tripHistory!!.add(Data("Shodlik 60 h, Uchtepa dis.", "Amir Temur Avenue 2a block 23 A", "12.500sum"))
-        tripHistory!!.add(Data("Sharaf Raswhidov, prospect", "Muqimi 2a h, Chilanzar dis.", "29.00sum"))
+        tripHistory!!.add(Data("Sagbon 156 a block, Olmazor district", "Amir Temur Avenue 2a block 23 A", "38,500sum"))
+        tripHistory!!.add(Data("Istiqbol 20 h, Mirabad dis.", "Sharaf Rashidov, prospect", "14,200sum"))
+        tripHistory!!.add(Data("Muqimi 2a h, Chilanzar dis.", "Qumbuloq 13 h, Uchtepa dis.", "9,500sum"))
+        tripHistory!!.add(Data("Shodlik 60 h, Uchtepa dis.", "Amir Temur Avenue 2a block 23 A", "12,500sum"))
+        tripHistory!!.add(Data("Sharaf Raswhidov, prospect", "Muqimi 2a h, Chilanzar dis.", "29,00sum"))
+        tripHistory!!.add(Data("Sagbon 156 a block, Olmazor district", "Amir Temur Avenue 2a block 23 A", "38,500sum"))
+        tripHistory!!.add(Data("Istiqbol 20 h, Mirabad dis.", "Sharaf Rashidov, prospect", "14,200sum"))
+        tripHistory!!.add(Data("Muqimi 2a h, Chilanzar dis.", "Qumbuloq 13 h, Uchtepa dis.", "9,500sum"))
+        tripHistory!!.add(Data("Shodlik 60 h, Uchtepa dis.", "Amir Temur Avenue 2a block 23 A", "12,500sum"))
+        tripHistory!!.add(Data("Sharaf Raswhidov, prospect", "Muqimi 2a h, Chilanzar dis.", "29,000sum"))
     }
 
     //Checks whether location is enabled or not
@@ -66,6 +69,21 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton("Enable GPS") { dialog, id -> startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), PERMISSIONS_REQUEST_ENABLE_GPS) }
         val alert = builder.create()
         alert.show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                if (parentActivityIntent == null) {
+                    onBackPressed()
+                } else {
+                    NavUtils.navigateUpFromSameTask(this)
+                }
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

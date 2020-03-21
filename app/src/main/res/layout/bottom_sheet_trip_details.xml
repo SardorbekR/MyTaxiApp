@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trip_details"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="650dp"
     android:background="@android:color/white"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -44,9 +44,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="18dp"
         android:contentDescription="@string/call_button"
+        android:src="@drawable/bnt_call"
+        android:onClick="call"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/bnt_call" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tariff"
@@ -57,6 +58,7 @@
         android:fontFamily="@font/roboto_medium"
         android:text="@string/tariffTextView"
         android:textColor="#999999"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,6 +72,7 @@
         android:paddingEnd="70dp"
         android:text="@string/payment_type_textView"
         android:textColor="#999999"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,6 +126,7 @@
         android:paddingStart="5dp"
         android:text="@string/dateTextView"
         android:textColor="#999999"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
@@ -132,9 +136,9 @@
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="38dp"
+        android:src="@drawable/ic_point_start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider1"
-        android:src="@drawable/ic_point_start" />
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
     <TextView
         android:id="@+id/startingAddress"
@@ -150,6 +154,7 @@
         android:text="@string/sampleAddress1"
         android:textColor="#2C2C2C"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
@@ -158,9 +163,9 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
+        android:src="@drawable/dots"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startingPinIcon"
-        android:src="@drawable/dots" />
+        app:layout_constraintTop_toBottomOf="@+id/startingPinIcon" />
 
     <ImageView
         android:id="@+id/endingPointIcon"
@@ -168,20 +173,21 @@
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/ic_point_end"
+        android:src="@drawable/ic_point_end"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dotsIcon"
-        android:src="@drawable/ic_point_end" />
+        app:layout_constraintTop_toBottomOf="@+id/dotsIcon" />
 
     <TextView
         android:id="@+id/DateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="95dp"
         android:fontFamily="@font/roboto_medium"
         android:paddingStart="5dp"
-        android:text="@string/timeToday_textView"
+        android:text="19:00"
         android:textColor="#999999"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
@@ -190,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="115dp"
         android:fontFamily="@font/roboto_bold"
         android:maxLines="1"
         android:paddingStart="5dp"
@@ -199,6 +205,7 @@
         android:text="@string/sampleAddress2"
         android:textColor="#2C2C2C"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
@@ -207,7 +214,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="305dp"
+        android:layout_marginTop="327dp"
         android:layout_marginRight="24dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -224,6 +231,7 @@
         android:text="@string/distance_textView"
         android:textColor="#999999"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tripTime" />
 
@@ -237,6 +245,7 @@
         android:text="@string/trip_time_textView"
         android:textColor="#999999"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
@@ -332,6 +341,7 @@
         android:text="@string/base_fare_textView"
         android:textColor="#999999"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
@@ -345,6 +355,7 @@
         android:text="@string/ride_fee_textView"
         android:textColor="#999999"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/baseFare" />
 
@@ -359,7 +370,8 @@
         android:textColor="#999999"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rideFee" />
+        app:layout_constraintTop_toBottomOf="@+id/rideFee"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/rating"
@@ -371,6 +383,7 @@
         android:text="@string/rating_textView"
         android:textColor="#999999"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/driverName" />
 
@@ -415,9 +428,9 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="53dp"
         android:contentDescription="@string/star"
+        android:src="@drawable/star"
         app:layout_constraintStart_toEndOf="@+id/ratingNumber"
-        app:layout_constraintTop_toBottomOf="@+id/divider4"
-        android:src="@drawable/star" />
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <TextView
         android:id="@+id/tripsNumber"
@@ -429,6 +442,7 @@
         android:text="@string/tripsN_textView"
         android:textColor="#2C2C2C"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -442,6 +456,7 @@
         android:text="@string/trips_textView"
         android:textColor="#999999"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/tripsNumber"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -455,6 +470,7 @@
         android:text="@string/driverName_textView"
         android:textColor="#2C2C2C"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -468,6 +484,7 @@
         android:text="@string/ratingNum_textView"
         android:textColor="#2C2C2C"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/rating"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
